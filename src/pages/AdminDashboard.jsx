@@ -1,3 +1,4 @@
+// src/pages/AdminDashboard.jsx
 import { useEffect, useState } from "react";
 import { supabase } from "../lib/supabaseClient";
 
@@ -15,6 +16,10 @@ export default function AdminDashboard() {
   });
 
   const [saving, setSaving] = useState(false);
+
+  // estados para cloudinary
+  const [uploadingImage, setUploadingImage] = useState(false);
+  const [uploadError, setUploadError] = useState("");
 
   async function loadPlatillos() {
     setLoading(true);
@@ -41,6 +46,48 @@ export default function AdminDashboard() {
       precio: "",
       imagen: "",
     });
+    setUploadError("");
+  }
+
+  // 🔹 SUBIR IMAGEN A CLOUDINARY
+  async function handleImageUpload(e) {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    setUploadError("");
+    setUploadingImage(true);
+
+    try {
+      const cloudName = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME;
+      const uploadPreset = import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET;
+
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("upload_preset", uploadPreset);
+
+      const res = await fetch(
+        `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
+
+      const data = await res.json();
+
+      if (data.error) {
+        console.error(data.error);
+        setUploadError("No se pudo subir la imagen.");
+      } else {
+        // guardamos la URL de la imagen en el formulario
+        setForm((f) => ({ ...f, imagen: data.secure_url }));
+      }
+    } catch (err) {
+      console.error(err);
+      setUploadError("Ocurrió un error subiendo la imagen.");
+    } finally {
+      setUploadingImage(false);
+    }
   }
 
   async function handleSubmit(e) {
@@ -89,6 +136,7 @@ export default function AdminDashboard() {
       precio: p.precio || "",
       imagen: p.imagen || "",
     });
+    setUploadError("");
   }
 
   async function handleDelete(id) {
@@ -179,10 +227,33 @@ export default function AdminDashboard() {
             />
           </div>
 
-          <div>
+          {/* Imagen con Cloudinary + URL opcional */}
+          <div className="space-y-2">
             <label className="block text-xs font-medium text-slate-700 mb-1">
-              URL de imagen (opcional)
+              Imagen del platillo
             </label>
+
+            {/* input de archivo */}
+            <input
+              type="file"
+              accept="image/*"
+              onChange={handleImageUpload}
+              className="w-full text-xs text-slate-600"
+            />
+
+            {uploadingImage && (
+              <p className="text-[11px] text-slate-500">
+                Subiendo imagen...
+              </p>
+            )}
+
+            {uploadError && (
+              <p className="text-[11px] text-red-600 bg-red-50 border border-red-100 rounded px-2 py-1">
+                {uploadError}
+              </p>
+            )}
+
+            {/* campo opcional para pegar URL manual */}
             <input
               type="url"
               value={form.imagen}
@@ -190,8 +261,17 @@ export default function AdminDashboard() {
                 setForm((f) => ({ ...f, imagen: e.target.value }))
               }
               className="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-cyan-500 outline-none"
-              placeholder="https://..."
+              placeholder="O pega una URL de imagen (https://...)"
             />
+
+            {/* preview */}
+            {form.imagen && (
+              <img
+                src={form.imagen}
+                alt="Preview platillo"
+                className="mt-2 h-24 w-full object-cover rounded-lg border border-slate-200"
+              />
+            )}
           </div>
 
           <div className="flex gap-2 justify-end">
