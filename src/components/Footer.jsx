@@ -41,7 +41,7 @@ export default function Footer() {
               <a
                 href="https://www.facebook.com/marisqueria.javi/"
                 target="_blank"
-                rel="noreferrer"
+                rel="noopener noreferrer"
                 aria-label="Facebook Marisquería Javi"
                 className="h-9 w-9 rounded-full border border-cyan-900 flex items-center justify-center hover:bg-cyan-900 hover:text-[#fdf6ec] transition"
               >
