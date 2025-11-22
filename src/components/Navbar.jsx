@@ -6,7 +6,7 @@ function getNavClasses(isActive) {
   const base =
     "relative md:text-sm text-xs font-semibold tracking-[0.18em] uppercase transition-colors border-b-2 pb-1";
 
-  const active = "text-cyan-900 border-cyan-800 w-30 md:w-auto text-center";
+  const active = "text-cyan-900 border-cyan-800 w-35 md:w-auto text-center";
   const inactive =
     "text-slate-600 border-transparent hover:text-cyan-900 hover:border-cyan-800";
 
