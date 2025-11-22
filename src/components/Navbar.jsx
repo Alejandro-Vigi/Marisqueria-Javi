@@ -3,12 +3,14 @@ import { Link, NavLink } from "react-router-dom";
 import { useState } from "react";
 
 function getNavClasses(isActive) {
-  return [
-    "md:text-base text-sm font-semibold tracking-tight transition-colors",
-    isActive
-      ? "text-cyan-700"
-      : "text-slate-700 hover:text-cyan-700",
-  ].join(" ");
+  const base =
+    "relative md:text-sm text-xs font-semibold tracking-[0.18em] uppercase transition-colors border-b-2 pb-1";
+
+  const active = "text-cyan-900 border-cyan-800";
+  const inactive =
+    "text-slate-600 border-transparent hover:text-cyan-900 hover:border-cyan-800";
+
+  return [base, isActive ? active : inactive].join(" ");
 }
 
 export default function Navbar() {
@@ -18,8 +20,9 @@ export default function Navbar() {
   const cerrarMenu = () => setMenuAbierto(false);
 
   return (
-    <header className="sticky top-0 z-30 border-b border-slate-200 bg-white/90 backdrop-blur">
-      <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between md:justify-between">
+    <header className="sticky top-0 z-40 border-b border-slate-400/30 bg-[#fdf6ec]/95 backdrop-blur-sm">
+      {/* Barra principal */}
+      <div className="max-w-6xl mx-auto px-4 py-4 md:py-5 flex items-center justify-between">
         {/* Logo / Marca */}
         <Link
           to="/"
@@ -29,20 +32,20 @@ export default function Navbar() {
           <img
             src="/logo_512.png"
             alt="Logo Marisquería Javi"
-            className="h-10 w-10 rounded-full object-cover"
+            className="h-16 w-16 md:h-20 md:w-20 rounded-full object-cover"
           />
           <div className="flex flex-col leading-tight">
-            <span className="font-extrabold md:text-lg text-base tracking-tight text-slate-900">
+            <span className="font-extrabold md:text-xl text-lg tracking-[0.25em] text-cyan-900 uppercase">
               Marisquería Javi
             </span>
-            <span className="md:text-[0.8rem] text-[0.7rem] text-cyan-600 uppercase tracking-[0.2em]">
+            <span className="md:text-[0.8rem] text-[0.7rem] text-slate-600 uppercase tracking-[0.28em]">
               Sabor a mar
             </span>
           </div>
         </Link>
 
         {/* Navegación desktop */}
-        <nav className="hidden md:flex items-center gap-6">
+        <nav className="hidden md:flex items-center gap-8">
           <NavLink
             to="/"
             end
@@ -72,7 +75,7 @@ export default function Navbar() {
 
         {/* Botón hamburguesa (solo móvil) */}
         <button
-          className="md:hidden inline-flex items-center justify-center rounded-md p-2 text-slate-700 hover:bg-slate-100 hover:text-slate-900 transition-colors"
+          className="md:hidden inline-flex items-center justify-center rounded-md p-2 text-slate-700 hover:bg-slate-100/70 hover:text-cyan-900 transition-colors"
           onClick={toggleMenu}
           aria-label="Abrir menú de navegación"
         >
@@ -111,51 +114,51 @@ export default function Navbar() {
 
       {/* Menú desplegable móvil */}
       {menuAbierto && (
-        <nav className="md:hidden border-t border-slate-200 bg-white shadow-sm">
+        <nav className="md:hidden border-t border-slate-300/40 bg-[#fdf6ec] shadow-sm">
           <ul className="flex flex-col py-2 text-sm">
-            <li>
+            <li className="text-center">
               <NavLink
                 to="/"
                 end
                 className={({ isActive }) =>
                   getNavClasses(isActive) +
-                  " block text-center px-4 py-2 text-base"
+                  " inline-block px-4 py-2 text-sm"
                 }
                 onClick={cerrarMenu}
               >
                 Inicio
               </NavLink>
             </li>
-            <li>
+            <li className="text-center">
               <NavLink
                 to="/menu"
                 className={({ isActive }) =>
                   getNavClasses(isActive) +
-                  " block text-center px-4 py-2 text-base"
+                  " inline-block px-4 py-2 text-sm"
                 }
                 onClick={cerrarMenu}
               >
                 Menú
               </NavLink>
             </li>
-            <li>
+            <li className="text-center">
               <NavLink
                 to="/acerca"
                 className={({ isActive }) =>
                   getNavClasses(isActive) +
-                  " block text-center px-4 py-2 text-base"
+                  " inline-block px-4 py-2 text-sm"
                 }
                 onClick={cerrarMenu}
               >
                 Acerca de
               </NavLink>
             </li>
-            <li>
+            <li className="text-center">
               <NavLink
                 to="/contacto"
                 className={({ isActive }) =>
                   getNavClasses(isActive) +
-                  " block text-center px-4 py-2 text-base"
+                  " inline-block px-4 py-2 text-sm"
                 }
                 onClick={cerrarMenu}
               >
