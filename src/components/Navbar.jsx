@@ -115,14 +115,14 @@ export default function Navbar() {
       {/* Menú desplegable móvil */}
       {menuAbierto && (
         <nav className="md:hidden border-t border-slate-300/40 bg-[#fdf6ec] shadow-sm">
-          <ul className="flex flex-col py-2 text-sm">
+          <ul className="flex flex-col py-3 text-sm gap-2">
             <li className="text-center">
               <NavLink
                 to="/"
                 end
                 className={({ isActive }) =>
                   getNavClasses(isActive) +
-                  " inline-block px-4 py-2 text-sm"
+                  " inline-block px-4 py-3 text-sm"
                 }
                 onClick={cerrarMenu}
               >
@@ -134,7 +134,7 @@ export default function Navbar() {
                 to="/menu"
                 className={({ isActive }) =>
                   getNavClasses(isActive) +
-                  " inline-block px-4 py-2 text-sm"
+                  " inline-block px-4 py-3 text-sm"
                 }
                 onClick={cerrarMenu}
               >
@@ -146,7 +146,7 @@ export default function Navbar() {
                 to="/acerca"
                 className={({ isActive }) =>
                   getNavClasses(isActive) +
-                  " inline-block px-4 py-2 text-sm"
+                  " inline-block px-4 py-3 text-sm"
                 }
                 onClick={cerrarMenu}
               >
@@ -158,7 +158,7 @@ export default function Navbar() {
                 to="/contacto"
                 className={({ isActive }) =>
                   getNavClasses(isActive) +
-                  " inline-block px-4 py-2 text-sm"
+                  " inline-block px-4 py-3 text-sm"
                 }
                 onClick={cerrarMenu}
               >
