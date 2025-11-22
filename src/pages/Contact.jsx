@@ -23,7 +23,7 @@ export default function Contact() {
               Horarios
             </h2>
             <p className="text-sm text-slate-600">
-              Lunes a domingo · 12:00 pm – 8:00 pm
+              Martes a domingo · 10:00 am – 6:00 pm
             </p>
           </div>
 
@@ -40,22 +40,8 @@ export default function Contact() {
                 href="tel:+525500000000"
                 className="text-cyan-700 hover:underline"
               >
-                55 0000 0000
+                55 8288 0633
               </a>
-            </p>
-            <p className="text-sm text-slate-600">
-              WhatsApp:{" "}
-              <a
-                href="https://wa.me/525500000000"
-                target="_blank"
-                rel="noreferrer"
-                className="text-cyan-700 hover:underline"
-              >
-                55 0000 0000
-              </a>{" "}
-              <span className="text-xs text-slate-500">
-                (pedidos y reservaciones)
-              </span>
             </p>
           </div>
 
