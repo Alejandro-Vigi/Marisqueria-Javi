@@ -2,6 +2,35 @@
 import { useEffect, useState } from "react";
 import { supabase } from "../lib/supabaseClient";
 
+// 🔹 Lista fija de categorías permitidas
+const CATEGORIES = [
+  "Entradas",
+  "Guarniciones",
+  "Cocteles",
+  "Platillos especiales fines de semana",
+  "Caldos y Sopas",
+  "Ensaladas",
+  "Mojarras",
+  "Filetes",
+  "Camarones",
+  "Empapelado",
+  "Bebidas sin alcohol",
+  "Cariber especial",
+  "Cervezas",
+  "Bebidas con alcohol",
+  "Vinos",
+  "Tequilas",
+  "Licores",
+  "Whiskys",
+  "Rones",
+  "Bebidas calientes",
+  "Bebidas frías",
+  "Sanwiches",
+  "Platillitos",
+  "Antojitos",
+  "Postres",
+];
+
 export default function AdminDashboard() {
   const [platillos, setPlatillos] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -165,20 +194,26 @@ export default function AdminDashboard() {
         className="bg-white rounded-2xl shadow-sm border border-slate-100 p-4 grid md:grid-cols-2 gap-4"
       >
         <div className="space-y-3">
+          {/* 🔹 CATEGORÍA COMO SELECT */}
           <div>
             <label className="block text-xs font-medium text-slate-700 mb-1">
               Categoría
             </label>
-            <input
-              type="text"
+            <select
               value={form.categoria}
               onChange={(e) =>
                 setForm((f) => ({ ...f, categoria: e.target.value }))
               }
-              className="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-cyan-500 outline-none"
-              placeholder="Ej. Ceviches, Tostadas..."
+              className="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-cyan-500 outline-none bg-white"
               required
-            />
+            >
+              <option value="">Selecciona una categoría</option>
+              {CATEGORIES.map((cat) => (
+                <option key={cat} value={cat}>
+                  {cat}
+                </option>
+              ))}
+            </select>
           </div>
 
           <div>
@@ -242,9 +277,7 @@ export default function AdminDashboard() {
             />
 
             {uploadingImage && (
-              <p className="text-[11px] text-slate-500">
-                Subiendo imagen...
-              </p>
+              <p className="text-[11px] text-slate-500">Subiendo imagen...</p>
             )}
 
             {uploadError && (
