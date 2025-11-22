@@ -7,9 +7,8 @@ export default function Footer() {
     <footer className="border-t border-slate-400/30 bg-[#fdf6ec]">
       <div className="max-w-6xl mx-auto px-4 py-8 space-y-6 text-slate-700">
         <div className="grid gap-8 md:grid-cols-3 text-sm">
-
           {/* Contacto — en móvil segundo */}
-          <div className="space-y-2 text-center md:text-left order-2 md:order-none">
+          <div className="space-y-2 text-center md:text-left order-2 md:order-0">
             <h3 className="text-[11px] font-semibold tracking-[0.25em] uppercase text-cyan-900">
               Contáctanos
             </h3>
@@ -29,7 +28,7 @@ export default function Footer() {
           </div>
 
           {/* Marca + redes — en móvil primero */}
-          <div className="text-center space-y-3 order-1 md:order-none">
+          <div className="text-center space-y-3 order-1 md:order-0">
             <h2 className="text-2xl font-black tracking-[0.35em] uppercase text-cyan-900">
               Marisquería Javi
             </h2>
@@ -74,21 +73,36 @@ export default function Footer() {
           </div>
 
           {/* Horarios — en móvil tercero */}
-          <div className="space-y-2 text-center md:text-right order-3 md:order-none">
+          <div className="space-y-2 text-center md:text-right order-3 md:order-0">
             <h3 className="text-[11px] font-semibold tracking-[0.25em] uppercase text-cyan-900">
               Horarios
             </h3>
-
             <p>Martes a Domingo · 10:00 – 18:00 h</p>
-
             <div className="mt-3">
+            <div className="flex justify-center md:justify-end items-center gap-3 text-xs text-slate-500">
+              <Link
+                to="/"
+                className="hover:text-cyan-900 underline underline-offset-4"
+              >
+                Inicio
+              </Link>
+              <span className="text-slate-400">·</span>
+              <Link
+                to="/menu"
+                className="hover:text-cyan-900 underline underline-offset-4"
+              >
+                Menú
+              </Link>
+              <span className="text-slate-400">·</span>
               <Link
                 to="/admin"
-                className="text-xs text-slate-500 hover:text-cyan-900 underline underline-offset-4"
+                className="hover:text-cyan-900 underline underline-offset-4"
               >
                 Admin
               </Link>
             </div>
+          </div>
+
           </div>
         </div>
 
