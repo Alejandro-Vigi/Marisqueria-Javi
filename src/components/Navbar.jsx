@@ -4,11 +4,11 @@ import { useState } from "react";
 
 function getNavClasses(isActive) {
   const base =
-    "relative md:text-sm text-xs font-semibold tracking-[0.18em] uppercase transition-colors border-b-2 pb-1";
+    "relative md:text-lg text-base font-bold tracking-[0.20em] uppercase transition-all pb-1 border-b-4";
 
-  const active = "text-cyan-900 border-cyan-800 w-auto text-center";
+  const active = "text-cyan-900 border-cyan-900";
   const inactive =
-    "text-slate-600 border-transparent hover:text-cyan-900 hover:border-cyan-800";
+    "text-slate-600 border-transparent hover:text-cyan-900 hover:border-cyan-700";
 
   return [base, isActive ? active : inactive].join(" ");
 }
@@ -20,7 +20,7 @@ export default function Navbar() {
   const cerrarMenu = () => setMenuAbierto(false);
 
   return (
-    <header className="sticky top-0 z-40 border-b border-slate-400/30 bg-[#fdf6ec]/95 backdrop-blur-sm">
+    <header className="sticky top-0 z-40 border-b border-slate-400/30 bg-[#fdf6ec]/95 backdrop-blur-sm shadow-md">
       {/* Barra principal */}
       <div className="max-w-6xl mx-auto px-4 py-4 md:py-5 flex items-center justify-between">
         {/* Logo / Marca */}
@@ -45,7 +45,7 @@ export default function Navbar() {
         </Link>
 
         {/* Navegación desktop */}
-        <nav className="hidden md:flex items-center gap-8">
+        <nav className="hidden md:flex items-center gap-10">
           <NavLink
             to="/"
             end
@@ -58,18 +58,6 @@ export default function Navbar() {
             className={({ isActive }) => getNavClasses(isActive)}
           >
             Menú
-          </NavLink>
-          <NavLink
-            to="/acerca"
-            className={({ isActive }) => getNavClasses(isActive)}
-          >
-            Acerca de
-          </NavLink>
-          <NavLink
-            to="/contacto"
-            className={({ isActive }) => getNavClasses(isActive)}
-          >
-            Contacto
           </NavLink>
         </nav>
 
@@ -139,30 +127,6 @@ export default function Navbar() {
                 onClick={cerrarMenu}
               >
                 Menú
-              </NavLink>
-            </li>
-            <li className="text-center">
-              <NavLink
-                to="/acerca"
-                className={({ isActive }) =>
-                  getNavClasses(isActive) +
-                  " inline-block px-4 py-3 text-sm"
-                }
-                onClick={cerrarMenu}
-              >
-                Acerca de
-              </NavLink>
-            </li>
-            <li className="text-center">
-              <NavLink
-                to="/contacto"
-                className={({ isActive }) =>
-                  getNavClasses(isActive) +
-                  " inline-block px-4 py-3 text-sm"
-                }
-                onClick={cerrarMenu}
-              >
-                Contacto
               </NavLink>
             </li>
           </ul>
