@@ -15,7 +15,6 @@ const CATEGORIES = [
   "Camarones",
   "Empapelado",
   "Bebidas sin alcohol",
-  "Cariber especial",
   "Cervezas",
   "Bebidas con alcohol",
   "Vinos",
