@@ -108,7 +108,7 @@ export default function Menu() {
   }
 
   return (
-    <section className="bg-slate-50">
+    <section className="bg-[#fdf6ec]">
       <div className="max-w-6xl mx-auto px-4 py-10">
         {/* Encabezado tipo Pacífico */}
         <div className="text-center mb-6">
