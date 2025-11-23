@@ -99,7 +99,7 @@ export default function Menu() {
     return (
       <section className="max-w-6xl mx-auto px-4 py-10">
         <h1 className="text-3xl font-extrabold text-slate-900 mb-4">
-          Menú de Marisquería Javi
+          Menú
         </h1>
         <p className="text-slate-500">
           Aún no hay platillos registrados en el sistema.
@@ -117,12 +117,10 @@ export default function Menu() {
             Menú de mariscos · cafetería
           </p>
           <h1 className="mt-2 text-3xl md:text-4xl font-extrabold tracking-[0.18em] uppercase text-slate-900">
-            Menú {" "}
-            <span className="text-cyan-800">Marisquería Javi</span>
+            Menú
           </h1>
           <p className="mt-3 text-[0.8rem] md:text-xs text-slate-500 max-w-xl mx-auto">
-            Los precios y platillos pueden cambiar sin previo aviso. Pregunta
-            por la disponibilidad de especialidades de fin de semana.
+            Los precios y platillos pueden cambiar sin previo aviso.
           </p>
         </div>
 
