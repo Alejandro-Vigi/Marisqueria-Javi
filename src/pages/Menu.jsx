@@ -25,7 +25,7 @@ const MANUAL_CATEGORIES = [
   // Bebidas bar
   "Bebidas sin alcohol",
   "Cervezas",
-  "Bebidas con alcohol",
+  "Bebidas especiales con alcohol",
   "Vinos",
   "Tequilas",
   "Licores",
