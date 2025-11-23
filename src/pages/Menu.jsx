@@ -184,9 +184,6 @@ export default function Menu() {
               return (
                 <section key={categoria} className="mb-10 last:mb-0">
                   {/* Encabezado de sección tipo “CRUDERÍA” */}
-                  <p className="text-[0.65rem] tracking-[0.35em] uppercase text-slate-500 mb-1">
-                    Sección
-                  </p>
                   <h2 className="text-2xl md:text-3xl font-black tracking-[0.25em] text-cyan-900 uppercase mb-4">
                     {categoria}
                   </h2>
