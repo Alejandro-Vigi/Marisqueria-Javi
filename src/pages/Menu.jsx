@@ -126,7 +126,7 @@ export default function Menu() {
         </div>
 
         {/* Tarjeta grande tipo carta */}
-        <div className="bg-[#fdf6ec] border border-slate-200 rounded-3xl shadow-[0_18px_40px_rgba(15,23,42,0.12)] overflow-hidden">
+        <div className="bg-[#f3f5f6] border border-slate-200 rounded-3xl shadow-[0_18px_40px_rgba(15,23,42,0.12)] overflow-hidden">
           {/* Barra compacta + toggle de secciones */}
           <div className="px-5 md:px-8 pt-6 pb-4 border-b border-slate-200/70">
             <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
@@ -140,7 +140,7 @@ export default function Menu() {
               <button
                 type="button"
                 onClick={() => setMostrarCategorias((v) => !v)}
-                className="inline-flex items-center justify-center gap-2 rounded-full border border-cyan-800 px-4 py-2 text-[0.7rem] md:text-xs font-semibold tracking-[0.18em] uppercase bg-[#fdf6ec] text-cyan-800 hover:bg-cyan-50 transition-colors"
+                className="inline-flex items-center justify-center gap-2 rounded-full border border-cyan-800 px-4 py-2 text-[0.7rem] md:text-xs font-semibold tracking-[0.18em] uppercase bg-[#f3f5f6] text-cyan-800 hover:bg-cyan-50 transition-colors"
               >
                 {mostrarCategorias
                   ? "Ocultar secciones del menú"
@@ -168,7 +168,7 @@ export default function Menu() {
             <div
               className={`mt-3 md:mt-4 overflow-hidden transition-all duration-300 ease-out ${
                 mostrarCategorias
-                  ? "max-h-[420px] opacity-100"
+                  ? "max-h-[900px] opacity-100"
                   : "max-h-0 opacity-0 pointer-events-none"
               }`}
             >
@@ -183,7 +183,7 @@ export default function Menu() {
                     "px-4 py-2 rounded-full text-[0.7rem] md:text-xs font-semibold tracking-[0.18em] uppercase border transition-colors",
                     categoriaSeleccionada === "TODO"
                       ? "bg-cyan-800 text-[#fdf6ec] border-cyan-800 shadow-sm"
-                      : "bg-[#fdf6ec] text-cyan-800 border-cyan-700/40 hover:bg-cyan-50",
+                      : "bg-[#f3f5f6] text-cyan-800 border-cyan-700/40 hover:bg-cyan-50",
                   ].join(" ")}
                 >
                   Todo el menú
@@ -195,13 +195,13 @@ export default function Menu() {
                     type="button"
                     onClick={() => {
                       setCategoriaSeleccionada(cat);
-                      setMostrarCategorias(false); // 🔥 se cierra automático
+                      setMostrarCategorias(false); // se cierra automático
                     }}
                     className={[
                       "px-4 py-2 rounded-full text-[0.7rem] md:text-xs font-semibold tracking-[0.18em] uppercase border transition-colors",
                       categoriaSeleccionada === cat
                         ? "bg-cyan-800 text-[#fdf6ec] border-cyan-800 shadow-sm"
-                        : "bg-[#fdf6ec] text-cyan-800 border-cyan-700/40 hover:bg-cyan-50",
+                        : "bg-[#f3f5f6] text-cyan-800 border-cyan-700/40 hover:bg-cyan-50",
                     ].join(" ")}
                   >
                     {cat}
