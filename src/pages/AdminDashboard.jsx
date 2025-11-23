@@ -2,32 +2,37 @@
 import { useEffect, useState, useMemo } from "react";
 import { supabase } from "../lib/supabaseClient";
 
-// 🔹 Lista fija de categorías permitidas
+// 🔹 Lista fija de categorías permitidas (mismo orden que el menú)
 const CATEGORIES = [
+  // Comida
   "Entradas",
   "Guarniciones",
-  "Cocteles",
   "Platillos especiales fines de semana",
-  "Caldos y Sopas",
+  "Cocteles",
   "Ensaladas",
+  "Caldos y Sopas",
   "Mojarras",
   "Filetes",
   "Camarones",
   "Empapelado",
+  "Sanwiches",
+  "Platillitos",
+  "Antojitos",
+  "Postres",
+
+  // Bebidas sin alcohol
   "Bebidas sin alcohol",
+  "Bebidas calientes",
+  "Bebidas frías",
+
+  // Bebidas con alcohol
   "Cervezas",
-  "Bebidas especiales con alcohol",
   "Vinos",
   "Tequilas",
   "Licores",
   "Whiskys",
   "Rones",
-  "Bebidas calientes",
-  "Bebidas frías",
-  "Sanwiches",
-  "Platillitos",
-  "Antojitos",
-  "Postres",
+  "Bebidas especiales con alcohol",
 ];
 
 export default function AdminDashboard() {
@@ -268,7 +273,7 @@ export default function AdminDashboard() {
         <button
           type="button"
           onClick={handleNew}
-          className="inline-flex items-center gap-2 rounded-full bg-cyan-600 text-white text-xs font-semibold px-4 py-2 hover:bg-cyan-700 transition-colors"
+          className="inline-flex items-center gap-2 rounded-full bg-cyan-600 text-white text-xs font-semibold px-4 py-2 hover:bg-cyan-700 transition-colors cursor-pointer"
         >
           <span className="text-lg leading-none">＋</span>
           Añadir platillo
@@ -276,12 +281,12 @@ export default function AdminDashboard() {
       </div>
 
       {/* Filtros tipo secciones del menú */}
-      <div className="bg-[#f3f5f6] border border-slate-200 rounded-3xl shadow-sm overflow-hidden">
+      <div className="overflow-hidden">
         <div className="px-5 md:px-8 pt-4 pb-4 border-b border-slate-200/70">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
-            <div className="text-[0.7rem] md:text-xs text-slate-600 tracking-[0.18em] uppercase text-center">
+            <div className="text-[0.7rem] md:text-xs text-slate-600 tracking-[0.18em] uppercase text-center md:text-left">
               Sección actual:
-              <span className="ml-2 inline-flex items-center text-slate-700 px-3 py-1 font-semibold rounded-full ">
+              <span className="ml-2 inline-flex items-center text-slate-700 px-3 py-1 font-semibold rounded-full">
                 {etiquetaSeleccionada}
               </span>
             </div>
@@ -289,7 +294,7 @@ export default function AdminDashboard() {
             <button
               type="button"
               onClick={() => setMostrarCategorias((v) => !v)}
-              className="inline-flex items-center justify-center gap-2 rounded-full border border-cyan-800 px-4 py-2 text-[0.7rem] md:text-xs font-semibold tracking-[0.18em] uppercase bg-[#f3f5f6] text-cyan-800 hover:bg-cyan-50 transition-colors"
+              className="inline-flex items-center justify-center gap-2 rounded-full border border-cyan-800 px-4 py-2 text-[0.7rem] md:text-xs font-semibold tracking-[0.18em] uppercase bg-transparent text-cyan-800 hover:bg-[#e8f5fa] transition-colors cursor-pointer"
             >
               {mostrarCategorias
                 ? "Ocultar secciones del menú"
@@ -321,6 +326,7 @@ export default function AdminDashboard() {
             }`}
           >
             <div className="flex flex-wrap justify-center gap-2">
+              {/* TODO el menú */}
               <button
                 type="button"
                 onClick={() => {
@@ -331,7 +337,7 @@ export default function AdminDashboard() {
                   "px-4 py-2 rounded-full text-[0.7rem] md:text-xs font-semibold tracking-[0.18em] uppercase border transition-colors",
                   categoriaFiltro === "TODO"
                     ? "bg-cyan-800 text-[#fdf6ec] border-cyan-800 shadow-sm"
-                    : "bg-[#f3f5f6] text-cyan-800 border-cyan-700/40 hover:bg-cyan-50",
+                    : "bg-[#fdf6ec] text-cyan-800 border-cyan-700/40 hover:bg-[#e8f5fa]",
                 ].join(" ")}
               >
                 Todo el menú
@@ -349,7 +355,7 @@ export default function AdminDashboard() {
                     "px-4 py-2 rounded-full text-[0.7rem] md:text-xs font-semibold tracking-[0.18em] uppercase border transition-colors",
                     categoriaFiltro === cat
                       ? "bg-cyan-800 text-[#fdf6ec] border-cyan-800 shadow-sm"
-                      : "bg-[#f3f5f6] text-cyan-800 border-cyan-700/40 hover:bg-cyan-50",
+                      : "bg-[#fdf6ec] text-cyan-800 border-cyan-700/40 hover:bg-[#e8f5fa]",
                   ].join(" ")}
                 >
                   {cat}
@@ -384,7 +390,7 @@ export default function AdminDashboard() {
               {platillosFiltrados.map((p) => (
                 <div
                   key={p.id}
-                  className="flex flex-col md:flex-row md:items-center justify-between gap-2 border-b border-slate-100 pb-2 last:border-b-0"
+                  className="flex flex-col md:flex-row md:items-center justify-between gap-2 border-b border-slate-100 pb-2 last:border-b-0 hover:bg-[#E8E0D3] transition-colors rounded-lg px-2"
                 >
                   <div className="flex-1">
                     <p className="text-xs uppercase tracking-[0.18em] text-cyan-600 font-semibold">
@@ -402,16 +408,16 @@ export default function AdminDashboard() {
                       </p>
                     )}
                   </div>
-                  <div className="flex gap-2">
+                  <div className="flex gap-2 justify-center">
                     <button
                       onClick={() => handleEdit(p)}
-                      className="px-3 py-1 text-xs rounded-full border border-slate-200 text-slate-700 hover:bg-slate-50"
+                      className="px-3 py-1 text-xs rounded-full border border-slate-200 text-slate-700 hover:bg-slate-50 cursor-pointer"
                     >
                       Editar
                     </button>
                     <button
                       onClick={() => askDelete(p)}
-                      className="px-3 py-1 text-xs rounded-full bg-red-500 text-white hover:bg-red-600"
+                      className="px-3 py-1 text-xs rounded-full bg-red-500 text-white hover:bg-red-600 cursor-pointer"
                     >
                       Eliminar
                     </button>
@@ -426,7 +432,7 @@ export default function AdminDashboard() {
       {/* 🔹 MODAL FORMULARIO (crear / editar) */}
       {isFormModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
-          <div className="bg-white rounded-2xl shadow-xl max-w-lg w-full mx-4 p-6">
+          <div className="bg-white rounded-2xl shadow-xl max-w-lg md:max-w-2/5 w-full mx-4 p-6">
             <h2 className="text-lg font-semibold text-slate-900 mb-4">
               {form.id ? "Editar platillo" : "Añadir platillo"}
             </h2>
@@ -631,7 +637,7 @@ export default function AdminDashboard() {
               <button
                 type="button"
                 onClick={confirmDelete}
-                className="px-4 py-2 rounded-lg bg-red-500 text-white text-xs font-semibold hover:bg-red-600 disabled:opacity-60 inline-flex items-center gap-2"
+                className="px-4 py-2 rounded-lg bg-red-500 text-white text-xs font-semibold hover:bg-red-600 disabled:opacity-60 inline-flex items-center gap-2 cursor-pointer"
                 disabled={deleting}
               >
                 {deleting && (

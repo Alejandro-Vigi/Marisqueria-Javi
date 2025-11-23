@@ -40,7 +40,7 @@ export default function AdminLogin() {
 
       <form
         onSubmit={handleSubmit}
-        className="bg-white rounded-2xl shadow-sm border border-slate-100 p-4 space-y-4"
+        className="p-4 space-y-4"
       >
         <div>
           <label className="block text-sm font-medium text-slate-700 mb-1">
