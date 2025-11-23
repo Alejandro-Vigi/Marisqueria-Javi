@@ -11,34 +11,37 @@ const bodyFont = {
 };
 
 const MANUAL_CATEGORIES = [
-  // Mariscos / comida
+  // 🔹 Comida: lo primero que un cliente busca
   "Entradas",
   "Guarniciones",
-  "Cocteles",
   "Platillos especiales fines de semana",
-  "Caldos y Sopas",
+  "Cocteles",
   "Ensaladas",
+  "Caldos y Sopas",
   "Mojarras",
   "Filetes",
   "Camarones",
   "Empapelado",
-  // Bebidas bar
+  "Sanwiches",
+  "Platillitos",
+  "Antojitos",
+  "Postres",
+
+  // 🔹 Bebidas sin alcohol (siempre antes que alcohol)
   "Bebidas sin alcohol",
+  "Bebidas calientes",
+  "Bebidas frías",
+
+  // 🔹 Aquí las bebidas con alcohol
   "Cervezas",
-  "Bebidas especiales con alcohol",
   "Vinos",
   "Tequilas",
   "Licores",
   "Whiskys",
   "Rones",
-  // Cafetería
-  "Bebidas calientes",
-  "Bebidas frías",
-  "Sanwiches",
-  "Platillitos",
-  "Antojitos",
-  "Postres",
+  "Bebidas especiales con alcohol"
 ];
+
 
 export default function Menu() {
   const [platillos, setPlatillos] = useState([]);
