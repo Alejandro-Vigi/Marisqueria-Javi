@@ -143,7 +143,7 @@ export default function Menu() {
         {/* 🔹 Barra de “Sección actual / Ver secciones del menú” (sin tarjeta) */}
         <div className="pb-4 mb-6 border-b border-slate-200/70">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
-            <div className="text-[0.7rem] md:text-xs text-slate-600 tracking-[0.18em] uppercase text-left md:text-left">
+            <div className="text-[0.7rem] md:text-xs text-slate-600 tracking-[0.18em] uppercase md:text-left text-center">
               Sección actual:
               <span className="ml-2 inline-flex items-center text-slate-700 px-1 md:px-2 py-1 font-semibold">
                 {etiquetaSeleccionada}
