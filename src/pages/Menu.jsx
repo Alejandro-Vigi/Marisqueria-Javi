@@ -16,7 +16,6 @@ const MANUAL_CATEGORIES = [
   "Spaghetti con camarones (Fin de semana)",
   // Bebidas bar
   "Bebidas sin alcohol",
-  "Cariber especial",
   "Cervezas",
   "Bebidas con alcohol",
   "Vinos",
