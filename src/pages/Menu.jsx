@@ -6,15 +6,13 @@ const MANUAL_CATEGORIES = [
   "Entradas",
   "Guarniciones",
   "Cocteles",
-  "Aguachile (Solo fin de semana)",
+  "Platillos especiales fines de semana",
   "Caldos y Sopas",
   "Ensaladas",
   "Mojarras",
   "Filetes",
   "Camarones",
-  "Empapelado de Mariscos",
-  "Spaghetti con camarones (Fin de semana)",
-  // Bebidas bar
+  "Empapelado",
   "Bebidas sin alcohol",
   "Cervezas",
   "Bebidas con alcohol",
@@ -23,14 +21,11 @@ const MANUAL_CATEGORIES = [
   "Licores",
   "Whiskys",
   "Rones",
-  // Cafetería
   "Bebidas calientes",
   "Bebidas frías",
   "Sanwiches",
   "Platillitos",
-  "Nachos con sus extras",
-  "Hotdog",
-  "Papas a la francesa",
+  "Antojitos",
   "Postres",
 ];
 
