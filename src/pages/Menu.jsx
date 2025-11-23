@@ -13,6 +13,7 @@ const MANUAL_CATEGORIES = [
   "Filetes",
   "Camarones",
   "Empapelado",
+  // Bebidas bar
   "Bebidas sin alcohol",
   "Cervezas",
   "Bebidas con alcohol",
@@ -21,6 +22,7 @@ const MANUAL_CATEGORIES = [
   "Licores",
   "Whiskys",
   "Rones",
+  // Cafetería
   "Bebidas calientes",
   "Bebidas frías",
   "Sanwiches",
@@ -33,6 +35,7 @@ export default function Menu() {
   const [platillos, setPlatillos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [categoriaSeleccionada, setCategoriaSeleccionada] = useState("TODO");
+  const [mostrarCategorias, setMostrarCategorias] = useState(false);
 
   useEffect(() => {
     async function loadPlatillos() {
@@ -65,8 +68,7 @@ export default function Menu() {
     return grupos;
   }, [platillos]);
 
-  // Orden de categorías: primero las manuales en ese orden,
-  // luego cualquier categoría extra que haya en la BD.
+  // Orden de categorías
   const categoriasOrdenadas = useMemo(() => {
     const existentes = Array.from(platillosPorCategoria.keys());
 
@@ -102,11 +104,16 @@ export default function Menu() {
     );
   }
 
+  const etiquetaSeleccionada =
+    categoriaSeleccionada === "TODO"
+      ? "Todo el menú"
+      : categoriaSeleccionada;
+
   return (
     <section className="bg-[#fdf6ec]">
       <div className="max-w-6xl mx-auto px-4 py-10">
         {/* Encabezado tipo Pacífico */}
-        <div className="text-center mb-6 ">
+        <div className="text-center mb-6">
           <p className="text-[0.7rem] tracking-[0.3em] uppercase text-slate-500">
             Menú de mariscos · cafetería
           </p>
@@ -120,46 +127,96 @@ export default function Menu() {
 
         {/* Tarjeta grande tipo carta */}
         <div className="bg-[#fdf6ec] border border-slate-200 rounded-3xl shadow-[0_18px_40px_rgba(15,23,42,0.12)] overflow-hidden">
-          {/* Filtros de categoría arriba */}
+          {/* Barra compacta + toggle de secciones */}
           <div className="px-5 md:px-8 pt-6 pb-4 border-b border-slate-200/70">
-            <div className="flex flex-wrap justify-center gap-2">
+            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+              <div className="text-[0.7rem] md:text-xs text-slate-600 tracking-[0.18em] uppercase text-center">
+                Sección actual:
+                <span className="ml-2 inline-flex items-center text-slate-600 px-3 py-1 font-semibold">
+                  {etiquetaSeleccionada}
+                </span>
+              </div>
+
               <button
                 type="button"
-                onClick={() => setCategoriaSeleccionada("TODO")}
-                className={[
-                  "px-4 py-2 rounded-full text-[0.7rem] md:text-xs font-semibold tracking-[0.18em] uppercase border transition-colors",
-                  categoriaSeleccionada === "TODO"
-                    ? "bg-cyan-800 text-[#fdf6ec] border-cyan-800 shadow-sm"
-                    : "bg-[#fdf6ec] text-cyan-800 border-cyan-700/40 hover:bg-cyan-50",
-                ].join(" ")}
+                onClick={() => setMostrarCategorias((v) => !v)}
+                className="inline-flex items-center justify-center gap-2 rounded-full border border-cyan-800 px-4 py-2 text-[0.7rem] md:text-xs font-semibold tracking-[0.18em] uppercase bg-[#fdf6ec] text-cyan-800 hover:bg-cyan-50 transition-colors"
               >
-                Todo el menú
+                {mostrarCategorias
+                  ? "Ocultar secciones del menú"
+                  : "Ver secciones del menú"}
+                <svg
+                  className={`h-4 w-4 transition-transform ${
+                    mostrarCategorias ? "rotate-180" : ""
+                  }`}
+                  viewBox="0 0 20 20"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M5 7.5L10 12.5L15 7.5"
+                    stroke="currentColor"
+                    strokeWidth="1.6"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
               </button>
+            </div>
 
-              {categoriasOrdenadas.map((cat) => (
+            {/* Secciones del menú (colapsables) */}
+            <div
+              className={`mt-3 md:mt-4 overflow-hidden transition-all duration-300 ease-out ${
+                mostrarCategorias
+                  ? "max-h-[420px] opacity-100"
+                  : "max-h-0 opacity-0 pointer-events-none"
+              }`}
+            >
+              <div className="flex flex-wrap justify-center gap-2">
                 <button
-                  key={cat}
                   type="button"
-                  onClick={() => setCategoriaSeleccionada(cat)}
+                  onClick={() => {
+                    setCategoriaSeleccionada("TODO");
+                    setMostrarCategorias(false);
+                  }}
                   className={[
                     "px-4 py-2 rounded-full text-[0.7rem] md:text-xs font-semibold tracking-[0.18em] uppercase border transition-colors",
-                    categoriaSeleccionada === cat
+                    categoriaSeleccionada === "TODO"
                       ? "bg-cyan-800 text-[#fdf6ec] border-cyan-800 shadow-sm"
                       : "bg-[#fdf6ec] text-cyan-800 border-cyan-700/40 hover:bg-cyan-50",
                   ].join(" ")}
                 >
-                  {cat}
+                  Todo el menú
                 </button>
-              ))}
-            </div>
 
-            <p className="mt-3 text-[0.7rem] text-center text-slate-500">
-              Toca una categoría para ver solo esa sección, o{" "}
-              <span className="font-semibold text-cyan-800">
-                &ldquo;Todo el menú&rdquo;
-              </span>{" "}
-              para ver la carta completa.
-            </p>
+                {categoriasOrdenadas.map((cat) => (
+                  <button
+                    key={cat}
+                    type="button"
+                    onClick={() => {
+                      setCategoriaSeleccionada(cat);
+                      setMostrarCategorias(false); // 🔥 se cierra automático
+                    }}
+                    className={[
+                      "px-4 py-2 rounded-full text-[0.7rem] md:text-xs font-semibold tracking-[0.18em] uppercase border transition-colors",
+                      categoriaSeleccionada === cat
+                        ? "bg-cyan-800 text-[#fdf6ec] border-cyan-800 shadow-sm"
+                        : "bg-[#fdf6ec] text-cyan-800 border-cyan-700/40 hover:bg-cyan-50",
+                    ].join(" ")}
+                  >
+                    {cat}
+                  </button>
+                ))}
+              </div>
+
+              <p className="mt-3 text-[0.7rem] text-center text-slate-500">
+                Elige una sección para ver solo esos platillos, o{" "}
+                <span className="font-semibold text-cyan-800">
+                  &ldquo;Todo el menú&rdquo;
+                </span>{" "}
+                para ver la carta completa.
+              </p>
+            </div>
           </div>
 
           {/* Secciones y platillos */}
@@ -177,7 +234,6 @@ export default function Menu() {
 
               return (
                 <section key={categoria} className="mb-10 last:mb-0">
-                  {/* Encabezado de sección tipo “CRUDERÍA” */}
                   <h2 className="text-2xl md:text-3xl font-black tracking-[0.25em] text-cyan-900 uppercase mb-4">
                     {categoria}
                   </h2>
@@ -189,7 +245,6 @@ export default function Menu() {
                         className="border-b border-slate-200/60 pb-3 last:border-b-0 last:pb-0"
                       >
                         <div className="flex gap-4 items-start">
-                          {/* Mini imagen opcional (si existe) */}
                           {p.imagen && (
                             <div className="hidden sm:block shrink-0">
                               <img
@@ -200,7 +255,6 @@ export default function Menu() {
                             </div>
                           )}
 
-                          {/* Nombre + descripción */}
                           <div className="flex-1 min-w-0">
                             <div className="flex items-baseline justify-between gap-3">
                               <h3 className="text-sm md:text-base font-semibold text-slate-900 tracking-tight">
