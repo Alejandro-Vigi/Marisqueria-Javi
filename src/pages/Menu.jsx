@@ -96,7 +96,7 @@ export default function Menu() {
 
   if (!platillos.length) {
     return (
-      <section className="max-w-6xl mx-auto px-4 py-10">
+      <section className="max-w-6xl mx-auto px-4 py-10 bg-[#fdf6ec]">
         <h1 className="text-3xl font-extrabold text-slate-900 mb-4">
           Menú
         </h1>
@@ -111,7 +111,7 @@ export default function Menu() {
     <section className="bg-[#fdf6ec]">
       <div className="max-w-6xl mx-auto px-4 py-10">
         {/* Encabezado tipo Pacífico */}
-        <div className="text-center mb-6">
+        <div className="text-center mb-6 ">
           <p className="text-[0.7rem] tracking-[0.3em] uppercase text-slate-500">
             Menú de mariscos · cafetería
           </p>
