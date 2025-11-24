@@ -55,19 +55,19 @@ export default function Home() {
             <img
               src="/marisqueria_javi_foto.webp"
               alt="Platillo especial Marisquería Javi"
-              className="w-full h-170 object-cover rounded-3xl"
+              className="w-full h-auto object-cover rounded-3xl"
             />
 
           </div>
 
-          <div className="absolute -bottom-5 -left-4 md:-left-6 bg-[#fdf0e2]/95 border border-[#f2dfc9] rounded-2xl px-4 py-3 text-xs text-slate-800 max-w-xs shadow-[0_10px_22px_rgba(15,23,42,0.20)]">
+          <div className="absolute -bottom-15 md:-bottom-8 -left-4 md:-left-6 bg-[#fdf0e2]/95 border border-[#f2dfc9] rounded-2xl px-4 py-3 text-xs text-slate-800 max-w-xs shadow-[0_10px_22px_rgba(15,23,42,0.20)]">
             <p
-              className="text-cyan-900 tracking-[0.18em] uppercase mb-1 text-xl font-semibold"
+              className="text-cyan-900 tracking-[0.18em] uppercase mb-1 md:text-xl font-semibold"
               style={headingFont}
             >
               MOJARRA FRITA DORADA
             </p>
-            <p className="text-[0.8rem] leading-relaxed">
+            <p className="text-[0.73rem] md:text-[0.8rem] leading-relaxed">
               Crujiente por fuera, suave por dentro, acompañada de ensalada fresca y preparada al momento.
             </p>
           </div>
@@ -75,7 +75,7 @@ export default function Home() {
       </section>
 
       {/* SECCIÓN VISÍTANOS */}
-      <section className="max-w-6xl mx-auto px-4 pb-14 space-y-8">
+      <section className="max-w-6xl mx-auto px-4 pb-14 space-y-8 mt-15">
         {/* Encabezado */}
         <div className="text-center space-y-2">
           <p className="text-[0.7rem] font-semibold tracking-[0.3em] uppercase text-cyan-900">
