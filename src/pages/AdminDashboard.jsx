@@ -547,7 +547,7 @@ export default function AdminDashboard() {
                     <img
                       src={form.imagen}
                       alt="Preview platillo"
-                      className="mt-2 h-24 w-full object-cover rounded-lg border border-slate-200"
+                      className="mt-2 h-full w-full object-cover rounded-lg border border-slate-200"
                     />
                   )}
                 </div>
