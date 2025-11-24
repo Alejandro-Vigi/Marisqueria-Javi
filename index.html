@@ -3,15 +3,122 @@
   <head>
     <meta charset="UTF-8" />
 
+    <!-- SEO básico -->
+    <title>Marisquería Javi · Mariscos frescos en Huixquilucan</title>
+    <meta
+      name="description"
+      content="Marisquería Javi ofrece mariscos frescos, mojarras fritas, cocteles y antojitos del mar en Huixquilucan. Ambiente familiar, porciones abundantes y servicio cálido."
+    />
+    <meta
+      name="keywords"
+      content="marisquería, mariscos, mojarras, cocteles, mariscos frescos, Huixquilucan, restaurante de mariscos"
+    />
+    <meta name="author" content="Marisquería Javi" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#0f4250" />
+
+    <!-- Canonical -->
+    <link
+      rel="canonical"
+      href="https://marisqueriajavi.netlify.app/"
+    />
+
     <!-- Favicons -->
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
     <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Marisquería Javi</title>
+    <!-- Preconnect a Google Fonts (mejor rendimiento) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- Fuentes -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lato:wght@300;400;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Open Graph (para compartir en redes) -->
+    <meta property="og:type" content="restaurant" />
+    <meta property="og:locale" content="es_MX" />
+    <meta
+      property="og:title"
+      content="Marisquería Javi · Mariscos frescos en Huixquilucan"
+    />
+    <meta
+      property="og:description"
+      content="Disfruta mojarras fritas, cocteles y antojitos del mar en Marisquería Javi. Mariscos frescos y ambiente familiar en Huixquilucan."
+    />
+    <meta
+      property="og:url"
+      content="https://marisqueriajavi.netlify.app/"
+    />
+    <meta
+      property="og:image"
+      content="https://marisqueriajavi.netlify.app/mj-mojarra-hero.webp"
+    />
+    <meta property="og:image:type" content="image/webp" />
+    <meta property="og:image:width" content="1600" />
+    <meta property="og:image:height" content="900" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Marisquería Javi · Mariscos frescos" />
+    <meta
+      name="twitter:description"
+      content="Mojarras fritas, cocteles y mariscos frescos en Huixquilucan."
+    />
+    <meta
+      name="twitter:image"
+      content="https://marisqueriajavi.netlify.app/mj-mojarra-hero.webp"
+    />
+
+    <!-- CSS de Vite -->
+    <link rel="stylesheet" crossorigin href="/assets/index-Ds6k-uhy.css" />
+
+    <!-- Datos estructurados JSON-LD (Google Local Business / Restaurant) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Restaurant",
+        "name": "Marisquería Javi",
+        "image": "https://marisqueriajavi.netlify.app/mj-mojarra-hero.webp",
+        "url": "https://marisqueriajavi.netlify.app/",
+        "telephone": "+52 55 8288 0633",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Carr Huixquilucan Río Hondo 89a",
+          "addressLocality": "Huixquilucan",
+          "postalCode": "52793",
+          "addressRegion": "México",
+          "addressCountry": "MX"
+        },
+        "servesCuisine": ["Mariscos", "Pescados", "Mexicana"],
+        "priceRange": "$$",
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": 19.405052,
+          "longitude": -99.31852
+        },
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday",
+              "Saturday",
+              "Sunday"
+            ],
+            "opens": "10:00",
+            "closes": "18:00"
+          }
+        ]
+      }
+    </script>
   </head>
   <body class="bg-[#fdf6ec] text-slate-900">
     <div id="root"></div>
