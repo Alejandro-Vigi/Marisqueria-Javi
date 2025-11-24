@@ -336,7 +336,7 @@ export default function Menu() {
             style={bodyFont}
           >
             {platilloActivo.imagen && (
-              <div className="w-full p-6">
+              <div className="w-full px-6 pt-6">
                 <div className="rounded-2xl overflow-hidden">
                   <img
                     src={platilloActivo.imagen}
@@ -350,7 +350,7 @@ export default function Menu() {
             <div className="px-5 pb-5 space-y-3">
               {/* Nombre con tu estilo */}
               <h3
-                className="text-2xl text-cyan-900 uppercase tracking-[0.12em] font-semibold"
+                className="text-2xl text-cyan-900 uppercase tracking-[0.12em] font-semibold mt-6"
                 style={headingFont}
               >
                 {platilloActivo.nombre}
