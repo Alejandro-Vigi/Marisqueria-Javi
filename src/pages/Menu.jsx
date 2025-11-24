@@ -336,17 +336,19 @@ export default function Menu() {
             style={bodyFont}
           >
             {platilloActivo.imagen && (
-              <div className="w-full">
-                <img
-                  src={platilloActivo.imagen}
-                  alt={platilloActivo.nombre}
-                  className="w-full h-56 md:h-64 object-cover p-6"
-                />
+              <div className="w-full p-6">
+                <div className="rounded-2xl overflow-hidden">
+                  <img
+                    src={platilloActivo.imagen}
+                    alt={platilloActivo.nombre}
+                    className="w-full h-56 md:h-64 object-cover"
+                  />
+                </div>
               </div>
             )}
 
-            <div className="p-5 space-y-3">
-              {/* Nombre con tu estilo de heading */}
+            <div className="px-5 pb-5 space-y-3">
+              {/* Nombre con tu estilo */}
               <h3
                 className="text-2xl text-cyan-900 uppercase tracking-[0.12em] font-semibold"
                 style={headingFont}
@@ -354,7 +356,7 @@ export default function Menu() {
                 {platilloActivo.nombre}
               </h3>
 
-              {/* Precio con mismo estilo que lista */}
+              {/* Precio con mismo estilo */}
               <p
                 className="text-lg md:text-xl font-medium whitespace-nowrap tracking-[0.12em]"
                 style={headingFont}
