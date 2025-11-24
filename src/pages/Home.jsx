@@ -13,7 +13,7 @@ const bodyFont = {
 
 export default function Home() {
   return (
-    <main className="bg-[#fdf0e2]" style={bodyFont}>
+    <main className="bg-[#fdf6ec]" style={bodyFont}>
       {/* HERO PRINCIPAL */}
       <section className="max-w-6xl mx-auto px-4 py-10 grid md:grid-cols-[1.1fr,1fr] gap-10 items-center">
         <div>
