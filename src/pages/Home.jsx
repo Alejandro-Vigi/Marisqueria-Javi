@@ -65,7 +65,7 @@ export default function Home() {
               className="text-cyan-900 tracking-[0.18em] uppercase mb-1 md:text-xl font-semibold"
               style={headingFont}
             >
-              MOJARRA FRITA DORADA
+              MOJARRA FRITA
             </p>
             <p className="text-[0.73rem] md:text-[0.8rem] leading-relaxed">
               Crujiente por fuera, suave por dentro, acompañada de ensalada fresca y preparada al momento.

@@ -3,11 +3,13 @@ import { supabase } from "../lib/supabaseClient";
 
 // Fuentes SOLO para este componente
 const headingFont = {
-  fontFamily: '"Bebas Neue", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+  fontFamily:
+    '"Bebas Neue", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
 };
 
 const bodyFont = {
-  fontFamily: '"Lato", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+  fontFamily:
+    '"Lato", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
 };
 
 const MANUAL_CATEGORIES = [
@@ -39,15 +41,23 @@ const MANUAL_CATEGORIES = [
   "Licores",
   "Whiskys",
   "Rones",
-  "Bebidas especiales con alcohol"
+  "Bebidas especiales con alcohol",
 ];
 
+// helper para descripción truncada tipo Uber (…)
+function truncateDescription(text, max = 120) {
+  if (!text) return "";
+  return text.length > max ? text.slice(0, max).trimEnd() + "…" : text;
+}
 
 export default function Menu() {
   const [platillos, setPlatillos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [categoriaSeleccionada, setCategoriaSeleccionada] = useState("TODO");
   const [mostrarCategorias, setMostrarCategorias] = useState(false);
+
+  // modal tipo Uber Eats
+  const [platilloActivo, setPlatilloActivo] = useState(null);
 
   useEffect(() => {
     async function loadPlatillos() {
@@ -84,12 +94,10 @@ export default function Menu() {
   const categoriasOrdenadas = useMemo(() => {
     const existentes = Array.from(platillosPorCategoria.keys());
 
-    const extras = existentes.filter(
-      (c) => !MANUAL_CATEGORIES.includes(c)
-    );
+    const extras = existentes.filter((c) => !MANUAL_CATEGORIES.includes(c));
 
     const manualFiltradas = MANUAL_CATEGORIES.filter((c) =>
-      existentes.includes(c)
+      existentes.includes(c),
     );
 
     return [...manualFiltradas, ...extras];
@@ -109,7 +117,10 @@ export default function Menu() {
         className="max-w-6xl mx-auto px-4 py-10 bg-[#fdf6ec]"
         style={bodyFont}
       >
-        <h1 className="text-3xl font-extrabold text-slate-900 mb-4" style={headingFont}>
+        <h1
+          className="text-3xl font-extrabold text-slate-900 mb-4"
+          style={headingFont}
+        >
           Menú
         </h1>
         <p className="text-slate-500">
@@ -120,9 +131,7 @@ export default function Menu() {
   }
 
   const etiquetaSeleccionada =
-    categoriaSeleccionada === "TODO"
-      ? "Todo el menú"
-      : categoriaSeleccionada;
+    categoriaSeleccionada === "TODO" ? "Todo el menú" : categoriaSeleccionada;
 
   return (
     <section className="bg-[#fdf6ec]" style={bodyFont}>
@@ -235,7 +244,7 @@ export default function Menu() {
           </div>
         </div>
 
-        {/* 🔹 Secciones y platillos estilo Pacífico */}
+        {/* 🔹 Secciones y platillos estilo Uber, pero con TUS estilos de texto */}
         <div>
           {categoriasOrdenadas.map((categoria) => {
             const items = platillosPorCategoria.get(categoria) || [];
@@ -250,7 +259,6 @@ export default function Menu() {
 
             return (
               <section key={categoria} className="mb-10 last:mb-0">
-                {/* Título de sección al estilo “PARA EMPEZAR EL DÍA” */}
                 <h2
                   className="text-center text-4xl md:text-5xl text-cyan-900 uppercase mb-6 tracking-[0.25em]"
                   style={headingFont}
@@ -258,45 +266,121 @@ export default function Menu() {
                   {categoria}
                 </h2>
 
-                <div className="space-y-4">
-                  {items.map((p) => (
-                    <div
-                      key={p.id}
-                      className="pb-4 last:border-b-0 last:pb-0"
-                    >
-                      <div className="flex items-start justify-between gap-4">
-                        <div className="flex-1">
-                          {/* Nombre del platillo estilo Pacífico */}
-                          <h3
-                            className="text-lg md:text-2xl text-cyan-900 uppercase tracking-[0.12em] font-semibold"
-                            style={headingFont}
-                          >
-                            {p.nombre}
-                          </h3>
-                          {/* Descripción debajo */}
-                          {p.descripcion && (
-                            <p className="mt-1 text-xs md:text-sm text-slate-700 font-medium">
-                              {p.descripcion}
+                {/* grid tipo Uber: 1 columna en móvil, 2 en escritorio */}
+                <div className="grid gap-3 md:grid-cols-2">
+                  {items.map((p) => {
+                    const descPreview = truncateDescription(p.descripcion, 120);
+
+                    return (
+                      <button
+                        key={p.id}
+                        type="button"
+                        onClick={() => setPlatilloActivo(p)}
+                        className="text-left bg-[#F2EBE1] border border-slate-100 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow cursor-pointer"
+                      >
+                        <div className="flex h-full">
+                          {/* Texto (respeta tus estilos) */}
+                          <div className="flex-1 px-3 py-3 pr-2 flex flex-col justify-center">
+                            {/* NOMBRE: mismas clases que tenías */}
+                            <h3
+                              className="text-lg md:text-2xl text-cyan-900 uppercase tracking-[0.12em] font-semibold"
+                              style={headingFont}
+                            >
+                              {p.nombre}
+                            </h3>
+
+                            {/* PRECIO debajo del nombre, pero con tus clases originales */}
+                            <p
+                              className="text-lg md:text-xl font-medium whitespace-nowrap tracking-[0.12em]"
+                              style={headingFont}
+                            >
+                              ${Number(p.precio).toFixed(2)}
                             </p>
+
+                            {/* DESCRIPCIÓN truncada, mismas clases que tenías */}
+                            {p.descripcion && (
+                              <p className="mt-1 text-xs md:text-sm text-slate-700 font-medium">
+                                {descPreview}
+                              </p>
+                            )}
+                          </div>
+
+                          {/* Imagen con MISMO padding p-3 */}
+                          {p.imagen && (
+                            <div className="p-3 flex items-center justify-center">
+                              <div className="w-28 h-24 md:w-32 md:h-24 rounded-xl overflow-hidden">
+                                <img
+                                  src={p.imagen}
+                                  alt={p.nombre}
+                                  className="w-full h-full object-cover"
+                                />
+                              </div>
+                            </div>
                           )}
                         </div>
-
-                        {/* Precio a la derecha */}
-                        <p
-                          className="text-lg md:text-xl font-medium  whitespace-nowrap tracking-[0.12em]"
-                          style={headingFont}
-                        >
-                          ${Number(p.precio).toFixed(2)}
-                        </p>
-                      </div>
-                    </div>
-                  ))}
+                      </button>
+                    );
+                  })}
                 </div>
               </section>
             );
           })}
         </div>
       </div>
+
+      {/* 🔹 Modal tipo ficha de Uber Eats */}
+      {platilloActivo && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/45 px-4">
+          <div
+            className="bg-white rounded-2xl max-w-md w-full overflow-hidden shadow-2xl"
+            style={bodyFont}
+          >
+            {platilloActivo.imagen && (
+              <div className="w-full">
+                <img
+                  src={platilloActivo.imagen}
+                  alt={platilloActivo.nombre}
+                  className="w-full h-56 md:h-64 object-cover p-6"
+                />
+              </div>
+            )}
+
+            <div className="p-5 space-y-3">
+              {/* Nombre con tu estilo de heading */}
+              <h3
+                className="text-2xl text-cyan-900 uppercase tracking-[0.12em] font-semibold"
+                style={headingFont}
+              >
+                {platilloActivo.nombre}
+              </h3>
+
+              {/* Precio con mismo estilo que lista */}
+              <p
+                className="text-lg md:text-xl font-medium whitespace-nowrap tracking-[0.12em]"
+                style={headingFont}
+              >
+                ${Number(platilloActivo.precio).toFixed(2)}
+              </p>
+
+              {platilloActivo.descripcion && (
+                <p className="text-sm text-slate-700 leading-relaxed font-medium">
+                  {platilloActivo.descripcion}
+                </p>
+              )}
+
+              <div className="pt-2 flex justify-end">
+                <button
+                  type="button"
+                  onClick={() => setPlatilloActivo(null)}
+                  className="px-4 py-2 rounded-full bg-slate-900 text-white text-xs font-semibold hover:bg-slate-800"
+                >
+                  Cerrar
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 }
