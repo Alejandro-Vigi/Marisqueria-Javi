@@ -433,7 +433,7 @@ export default function AdminDashboard() {
       {isFormModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
           <div className="bg-white rounded-2xl shadow-xl max-w-lg md:max-w-2/5 w-full mx-4 p-6 
-              max-h-[60vh] overflow-y-auto"> {/* <-- ALTURA MODIFICADA A 60% */}
+              max-h-[65vh] overflow-y-auto"> {/* <-- ALTURA MODIFICADA A 60% */}
             <h2 className="text-lg font-semibold text-slate-900 mb-4">
               {form.id ? "Editar platillo" : "Añadir platillo"}
             </h2>
