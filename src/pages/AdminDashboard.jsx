@@ -403,7 +403,7 @@ export default function AdminDashboard() {
                       </span>
                     </p>
                     {p.descripcion && (
-                      <p className="text-xs text-slate-500">
+                      <p className="text-xs text-slate-500 text-justify">
                         {p.descripcion}
                       </p>
                     )}
@@ -504,7 +504,7 @@ export default function AdminDashboard() {
                     onChange={(e) =>
                       setForm((f) => ({ ...f, descripcion: e.target.value }))
                     }
-                    className="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-cyan-500 outline-none min-h-20"
+                    className="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-cyan-500 outline-none min-h-20 text-justify"
                   />
                 </div>
 
