@@ -1,7 +1,7 @@
 # 🐟 Marisquería Javi — Sitio Web Oficial  
 ### Aplicación Web Administrable · React · Supabase · Cloudinary · Netlify
 
-![Banner](https://res.cloudinary.com/dbydniado/image/upload/v1730000000/banner-marisqueria.webp)
+![Banner](https://github.com/user-attachments/assets/6d424e66-a6fa-4adc-b943-08c70c21359c)
 
 Este repositorio contiene el código del **sitio web oficial de Marisquería Javi**, un restaurante familiar ubicado en Huixquilucan, Estado de México.  
 La aplicación está construida en **React + Vite**, cuenta con **panel de administración**, autenticación básica, almacenamiento de imágenes en **Cloudinary** y **hosting en Netlify**.  
