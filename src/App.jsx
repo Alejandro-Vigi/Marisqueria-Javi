@@ -25,6 +25,7 @@ function App() {
               </ProtectedRoute>
             }
           />
+          <Route path="*" element={<Home />} />
         </Routes>
       </main>
       <Footer />
