@@ -1,5 +1,6 @@
 // src/pages/AdminDashboard.jsx
 import { useEffect, useState, useMemo } from "react";
+import { useNavigate } from "react-router-dom";
 import { supabase } from "../lib/supabaseClient";
 
 // 🔹 Lista fija de categorías permitidas (mismo orden que el menú)
@@ -70,6 +71,12 @@ export default function AdminDashboard() {
   const [isConfirmDeleteOpen, setIsConfirmDeleteOpen] = useState(false);
   const [deleteTarget, setDeleteTarget] = useState(null);
   const [deleting, setDeleting] = useState(false);
+
+  // 🔹 Modales para logout
+  const [isLogoutConfirmOpen, setIsLogoutConfirmOpen] = useState(false);
+  const [isLogoutStatusOpen, setIsLogoutStatusOpen] = useState(false);
+
+  const navigate = useNavigate();
 
   async function loadPlatillos() {
     setLoading(true);
@@ -253,6 +260,20 @@ export default function AdminDashboard() {
     }
   }
 
+  // 🔹 Confirmar logout (limpia sesión y muestra modal de éxito)
+  function confirmLogout() {
+    localStorage.removeItem("mj_admin_logged");
+    localStorage.removeItem("mj_admin_expiresAt");
+    setIsLogoutConfirmOpen(false);
+    setIsLogoutStatusOpen(true);
+  }
+
+  // 🔹 Ir al menú público
+  function goToMenu() {
+    setIsLogoutStatusOpen(false);
+    navigate("/menu");
+  }
+
   // 🔹 Platillos filtrados por sección
   const platillosFiltrados = useMemo(() => {
     if (categoriaFiltro === "TODO") return platillos;
@@ -270,14 +291,24 @@ export default function AdminDashboard() {
           Administración de platillos
         </h1>
 
-        <button
-          type="button"
-          onClick={handleNew}
-          className="inline-flex items-center gap-2 rounded-full bg-cyan-600 text-white text-xs font-semibold px-4 py-2 hover:bg-cyan-700 transition-colors cursor-pointer"
-        >
-          <span className="text-lg leading-none">＋</span>
-          Añadir platillo
-        </button>
+        <div className="flex flex-wrap gap-2 ">
+          <button
+            type="button"
+            onClick={handleNew}
+            className="inline-flex items-center gap-2 rounded-full bg-cyan-600 text-white text-xs font-semibold px-4 py-2 hover:bg-cyan-700 transition-colors cursor-pointer"
+          >
+            <span className="text-lg leading-none">＋</span>
+            Añadir platillo
+          </button>
+
+          <button
+            type="button"
+            onClick={() => setIsLogoutConfirmOpen(true)}
+            className="inline-flex items-center gap-2 rounded-full border border-slate-300 text-xs font-semibold px-4 py-2 bg-red-500 hover:bg-red-700 transition-colors cursor-pointer text-white"
+          >
+            Cerrar sesión
+          </button>
+        </div>
       </div>
 
       {/* Filtros tipo secciones del menú */}
@@ -432,8 +463,11 @@ export default function AdminDashboard() {
       {/* 🔹 MODAL FORMULARIO (crear / editar) */}
       {isFormModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
-          <div className="bg-white rounded-2xl shadow-xl max-w-lg md:max-w-2/5 w-full mx-4 p-6 
-              max-h-[65vh] overflow-y-auto"> {/* <-- ALTURA MODIFICADA A 60% */}
+          <div
+            className="bg-white rounded-2xl shadow-xl max-w-lg md:max-w-2/5 w-full mx-4 p-6 
+              max-h-[65vh] overflow-y-auto"
+          >
+            {/* <-- ALTURA MODIFICADA A 60% */}
             <h2 className="text-lg font-semibold text-slate-900 mb-4">
               {form.id ? "Editar platillo" : "Añadir platillo"}
             </h2>
@@ -648,6 +682,59 @@ export default function AdminDashboard() {
                 Eliminar
               </button>
             </div>
+          </div>
+        </div>
+      )}
+
+      {/* 🔹 MODAL CONFIRMACIÓN LOGOUT */}
+      {isLogoutConfirmOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
+          <div className="bg-white rounded-2xl shadow-xl max-w-sm w-full mx-4 p-6">
+            <h3 className="text-lg font-semibold text-slate-900 mb-2">
+              Cerrar sesión
+            </h3>
+            <p className="text-sm text-slate-600 mb-4">
+              ¿Seguro que deseas cerrar la sesión del administrador?
+            </p>
+
+            <div className="flex justify-end gap-2">
+              <button
+                type="button"
+                onClick={() => setIsLogoutConfirmOpen(false)}
+                className="px-3 py-2 rounded-lg border border-slate-200 text-xs text-slate-600 hover:bg-slate-50"
+              >
+                Cancelar
+              </button>
+              <button
+                type="button"
+                onClick={confirmLogout}
+                className="px-4 py-2 rounded-lg bg-red-500 text-white text-xs font-semibold hover:bg-red-600 inline-flex items-center gap-2 cursor-pointer"
+              >
+                Cerrar sesión
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* 🔹 MODAL ESTADO LOGOUT */}
+      {isLogoutStatusOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
+          <div className="bg-white rounded-2xl shadow-xl max-w-sm w-full mx-4 p-6 text-center">
+            <h3 className="text-lg font-semibold mb-3 text-emerald-700">
+              Sesión cerrada correctamente
+            </h3>
+            <p className="text-sm text-slate-600 mb-4">
+              Tu sesión de administrador se ha cerrado. Puedes seguir viendo el
+              menú público del restaurante.
+            </p>
+            <button
+              type="button"
+              onClick={goToMenu}
+              className="px-4 py-2 rounded-lg bg-cyan-600 text-white text-xs font-semibold hover:bg-cyan-700"
+            >
+              Ir al menú
+            </button>
           </div>
         </div>
       )}

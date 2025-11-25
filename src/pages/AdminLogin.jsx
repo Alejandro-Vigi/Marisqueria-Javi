@@ -2,6 +2,8 @@ import { useState } from "react";
 import { supabase } from "../lib/supabaseClient";
 import { useNavigate } from "react-router-dom";
 
+const SESSION_DURATION_MS = 30 * 60 * 1000; // 30 minutos
+
 export default function AdminLogin() {
   const [usuario, setUsuario] = useState("");
   const [password, setPassword] = useState("");
@@ -25,7 +27,11 @@ export default function AdminLogin() {
       return;
     }
 
+    // Guardar sesión + expiración
+    const expiresAt = Date.now() + SESSION_DURATION_MS;
     localStorage.setItem("mj_admin_logged", "1");
+    localStorage.setItem("mj_admin_expiresAt", String(expiresAt));
+
     navigate("/admin/platillos");
   }
 
@@ -38,10 +44,7 @@ export default function AdminLogin() {
         Esta sección es sólo para administración del menú.
       </p>
 
-      <form
-        onSubmit={handleSubmit}
-        className="p-4 space-y-4"
-      >
+      <form onSubmit={handleSubmit} className="p-4 space-y-4">
         <div>
           <label className="block text-sm font-medium text-slate-700 mb-1">
             Usuario
