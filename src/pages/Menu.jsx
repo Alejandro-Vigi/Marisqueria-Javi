@@ -59,6 +59,9 @@ export default function Menu() {
   // modal tipo Uber Eats
   const [platilloActivo, setPlatilloActivo] = useState(null);
 
+  // estado para mostrar/ocultar botón "volver arriba"
+  const [showScrollTop, setShowScrollTop] = useState(false);
+
   useEffect(() => {
     async function loadPlatillos() {
       const { data, error } = await supabase
@@ -77,6 +80,28 @@ export default function Menu() {
 
     loadPlatillos();
   }, []);
+
+  useEffect(() => {
+    function handleScroll() {
+      // si bajó más de 400px, mostramos el botón
+      if (window.scrollY > 400) {
+        setShowScrollTop(true);
+      } else {
+        setShowScrollTop(false);
+      }
+    }
+
+    window.addEventListener("scroll", handleScroll);
+    // limpiar al desmontar
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  function scrollToTop() {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }
 
   // Agrupar por categoría
   const platillosPorCategoria = useMemo(() => {
@@ -382,6 +407,28 @@ export default function Menu() {
             </div>
           </div>
         </div>
+      )}
+
+      {/* Botón "volver arriba" fijo abajo a la derecha */}
+      {showScrollTop && (
+        <button
+          type="button"
+          onClick={scrollToTop}
+          className="fixed bottom-4 right-4 md:bottom-6 md:right-6 h-11 w-11 rounded-full bg-cyan-900 text-white flex items-center justify-center shadow-lg shadow-slate-900/30 hover:bg-cyan-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-600 focus:ring-offset-[#fdf6ec] transition"
+          aria-label="Volver arriba"
+        >
+          <svg
+            viewBox="0 0 24 24"
+            className="h-5 w-5"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2.4"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <polyline points="18 15 12 9 6 15" />
+          </svg>
+        </button>
       )}
     </section>
   );
